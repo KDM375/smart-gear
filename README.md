@@ -1,13 +1,14 @@
-### API Documentation
+# API Documentation
 
 ## Table of Contents
-- [Table of Contents](#table-of-contents)
-- [Overview](#overview)
-- [BaseURL](#baseurl)
-- [Models Overview](#models-overview)
-- [Endpoints](#endpoints)
-- [Authentication](#authentication)
-- [WebHooks](#webhooks)
+- [API Documentation](#api-documentation)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [BaseURL](#baseurl)
+  - [Models Overview](#models-overview)
+  - [Endpoints](#endpoints)
+  - [Authentication](#authentication)
+  - [WebHooks](#webhooks)
 
 ## Overview
 Smart Gear is an online e commerce website that specializes in selling electronic gadgets with the convenience of the products arriving right at your doorsteps. Smart Gear's backend technology focuses on providing a safe and convenient experience when making purchases online.
@@ -18,35 +19,38 @@ This link serves as the base url for using the api. It has been hosted using ren
 
 
 ## Models Overview
-#Product:
--name: Char
--description: Text
--price: Decimal
--stock: PositiveInteger
--created_at: DateTime
--image: Image
-#Cart:
--owner: FK to User
--items: Text
--total_price: Decimal
--created_at: DateTime
-#Transaction:
--transaction_id: PK
--owner: FK to User
--amount: Decimal
--transaction_type: Char
--status: Char
--created_at: DateTime
+**Product**:
+- Name: *char*
+- Description: *text*
+- Price: *decimal*
+- Stock: *positiveinteger*
+- Created_at: *datetime*
+- Image: *image*
+
+**Cart**:
+- Owner: *FK to user*
+- Items: *text*
+- Total_price: *decimal*
+- Created_at: *datetime*
+
+**Transaction**:
+- Transaction_id: *PK*
+- Owner: *FK to user*
+- Amount: *decimal*
+- Transaction_type: *char*
+- Status: *char*
+- Created_at: *datetime*
 
 ## Endpoints
 
-| Method | Endpoint                  | Description           |
-|--------|---------------------------|-----------------------|
-| GET    | `/api/products/`          | List all products     | 
-| POST   | `/api/products/`          | Create a new product  | 
-| GET    | `/api/products/<id>/`     | Get product details   | 
-| PUT    | `/api/products/<id>/`     | Update a product      | 
-| DELETE | `/api/products/<id>/`     | Delete a product      | 
+| Method | Endpoint                  | Description                      |
+|--------|---------------------------|----------------------------------|
+| POST   | `/account/register/`      | Register a new user              | 
+| POST   | `/account/token/`         | Obtaining the auth tokens        | 
+| GET    | `/account/token_refresh/` | Refreshing access tokens         | 
+| GET    | `/products/all_products/`  | Obtaining all product details    | 
+| POST   | `/payment/initiate/`      | Initiating checkout in Paystack  | 
+| GET    | `/payment/webhooks/`      | Handling Paystack webhooks       | 
 
 ## Authentication
 
