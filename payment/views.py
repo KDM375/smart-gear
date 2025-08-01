@@ -24,7 +24,7 @@ class Checkout(APIView):
             # Get the validated data. 
             validated_data = serializer.validated_data
             amount = validated_data.get('total_price')
-            email = validated_data.get('owner').email if validated_data.get('owner') else 'Missing Email'
+            email = validated_data.get('email')
 
         try:
             amount_in_pesewas = int(amount * 100)
@@ -77,7 +77,7 @@ class Checkout(APIView):
             return Response(
                 {"error": "An error occurred while connecting to Paystack."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
+            )   
 
 # Payment success and failure views
 def payment_success(request):

@@ -9,7 +9,5 @@ class ProductSerializer(serializers.ModelSerializer):
 class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = cart
-        fields = ['total_price', 'owner']
-        extra_kwargs = {
-            'owner': {'write_only': True}  # Owner can be set later, not required at creation
-        }
+        fields = ['total_price']
+        
