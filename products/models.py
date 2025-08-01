@@ -16,7 +16,8 @@ class Product(models.Model):
     
 #this is the cart model
 class cart(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE),
+    email = models.EmailField(max_length=100, null=True)
     items = models.TextField()
     total_price = models.DecimalField(decimal_places=2, max_digits=10, default=0)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
