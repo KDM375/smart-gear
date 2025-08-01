@@ -11,5 +11,5 @@ class CartSerializer(serializers.ModelSerializer):
         model = cart
         fields = ['total_price', 'owner']
         extra_kwargs = {
-            'owner': {'read_only': True}  # Owner can be set later, not required at creation
+            'owner': {'write_only': True}  # Owner can be set later, not required at creation
         }

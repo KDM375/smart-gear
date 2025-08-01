@@ -10,7 +10,7 @@ from .models import Transaction
 from django.http import HttpResponse, JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from django.views import View
+from django.views import View 
 from products.serializers import CartSerializer 
 
 class Checkout(APIView):
@@ -20,10 +20,11 @@ class Checkout(APIView):
         serializer = CartSerializer(data=request.data)
 
         # 2. Validate the data. This is the key step.
-        if serializer.is_valid():
+        if serializer.is_valid(): 
             # Get the validated data. 
             validated_data = serializer.validated_data
             amount = validated_data.get('total_price')
+            email = validated_data.get('owner').email if validated_data.get('owner') else 'Missing Email'
 
         try:
             amount_in_pesewas = int(amount * 100)
@@ -41,7 +42,7 @@ class Checkout(APIView):
 
         # Paystack payload
         payload = {
-            'email': 'example@gma.com',  # Assuming the user is authenticated and has an email
+            'email': email,  # Assuming the user is authenticated and has an email
             'amount': amount_in_pesewas,  # it is multipled by hundred cause it is in peswas
             'currency': 'GHS',
             'channels': ('card', 'mobile_money', 'bank_transfer'),
