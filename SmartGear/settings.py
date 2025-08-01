@@ -10,7 +10,7 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1), #Sets expery time for refresh token, thus in 1 day
 
 }
-PAYSTACK_SECRET_KEY = 'sk_live_dbbfc748cc80c82e9136edfc50594fbd74f69294' # Paystack secret key for verification
+PAYSTACK_SECRET_KEY = 'sk_live_777c055f2074f8e950efc9e9ce9b8993449c20fa' # Paystack secret key for verification
 PAYSTACK_PUBLIC_KEY = 'pk_live_40997d33a68f27d4268d84cb22792ecc415e4788'
 
 # Quick-start development settings - unsuitable for production
@@ -20,7 +20,7 @@ PAYSTACK_PUBLIC_KEY = 'pk_live_40997d33a68f27d4268d84cb22792ecc415e4788'
 SECRET_KEY = 'django-insecure-1qdu60c61iyu7n_6_06w+en28ueck4van^_zc8f^qr*_g-k2gw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'rest_framework', #added rest_framework
     'corsheaders', #added CORS headers
     'products', #added products app
-    'payment' #added payment app
+    'payment', #added payment app
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
