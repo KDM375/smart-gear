@@ -11,16 +11,25 @@ from django.http import HttpResponse, JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views import View
+from products.serializers import CartSerializer 
 
 class Checkout(APIView):
+    serializer_class = CartSerializer
     def post(self, request, *args, **kwargs):
         #get the amount from the request data
-        amount = request.data.get('amount') 
+        serializer = CartSerializer(data=request.data)
 
-        # Check if amount is provided
-        if not amount:
+        # 2. Validate the data. This is the key step.
+        if serializer.is_valid():
+            # Get the validated data. 
+            validated_data = serializer.validated_data
+            amount = validated_data.get('total_price')
+
+        try:
+            amount_in_pesewas = int(amount * 100)
+        except (ValueError, TypeError) as e:
             return Response(
-                {"error": "Amount are required."},
+                {"error": f"Invalid amount format: {e}"},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
@@ -32,7 +41,8 @@ class Checkout(APIView):
 
         # Paystack payload
         payload = {
-            'amount': amount,  # it is multipled by hundred cause it is in peswas
+            'email': 'example@gma.com',  # Assuming the user is authenticated and has an email
+            'amount': amount_in_pesewas,  # it is multipled by hundred cause it is in peswas
             'currency': 'GHS',
             'channels': ('card', 'mobile_money', 'bank_transfer'),
             'reference': str(uuid.uuid4()), # Generate a unique reference for the transaction
@@ -57,7 +67,10 @@ class Checkout(APIView):
                     status=status.HTTP_200_OK 
                 )
             else:
-                return False, "Payment Initialization Failed"
+                return Response(
+                    {"error": "Payment Initialization Failed"},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
 
         except requests.exceptions.RequestException as e:
             return Response(

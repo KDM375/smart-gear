@@ -10,7 +10,7 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1), #Sets expery time for refresh token, thus in 1 day
 
 }
-PAYSTACK_SECRET_KEY = 'sk_live_6beda84f7f842bef0f2e09dadcc5dfe04a105f66' # Paystack secret key for verification
+PAYSTACK_SECRET_KEY = 'sk_live_dbbfc748cc80c82e9136edfc50594fbd74f69294' # Paystack secret key for verification
 PAYSTACK_PUBLIC_KEY = 'pk_live_40997d33a68f27d4268d84cb22792ecc415e4788'
 
 # Quick-start development settings - unsuitable for production
