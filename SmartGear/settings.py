@@ -4,13 +4,14 @@ from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+#json web tokens
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=20),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=20),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=20), #Sets expery time for access token, thus in 20 minutes
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1), #Sets expery time for refresh token, thus in 1 day
 
 }
-PAYSTACK_SECRET_KEY = 'sk_test_ade50cf89adfdd1969478556e175df94fdce638c'
-PAYSTACK_PUBLIC_KEY = 'pk_test_572d0a8419958c3d6097ac4b3d78dbd54bffab67'
+PAYSTACK_SECRET_KEY = 'sk_live_6beda84f7f842bef0f2e09dadcc5dfe04a105f66' # Paystack secret key for verification
+PAYSTACK_PUBLIC_KEY = 'pk_live_40997d33a68f27d4268d84cb22792ecc415e4788'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -19,7 +20,7 @@ PAYSTACK_PUBLIC_KEY = 'pk_test_572d0a8419958c3d6097ac4b3d78dbd54bffab67'
 SECRET_KEY = 'django-insecure-1qdu60c61iyu7n_6_06w+en28ueck4van^_zc8f^qr*_g-k2gw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -33,11 +34,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account',
-    'rest_framework',
-    'corsheaders',
-    'products',
-    'payment'
+    'account', #added account app
+    'rest_framework', #added rest_framework
+    'corsheaders', #added CORS headers
+    'products', #added products app
+    'payment' #added payment app
 ]
 
 MIDDLEWARE = [
@@ -125,9 +126,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS settings
+CORS_ALLOW_ALL_ORIGINS = True # Allow all origins for 
 
-CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = True # Allow credentials 
 
 CORS_ALLOW_HEADERS = [
             "accept",
